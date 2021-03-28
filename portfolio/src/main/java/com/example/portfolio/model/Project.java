@@ -3,17 +3,21 @@ package com.example.portfolio.model;
 
 import javax.persistence.*;
 
+/**
+ * Projects with
+ * @author MarcP
+ */
 @Entity
-@Table(name="Project")
+@Table(name="PROJECT")
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "TITLE")
     private String firstName;
 
-    @Column(name = "DESC")
+    @Column(name = "DESCRIPTION")
     private String lastName;
 }

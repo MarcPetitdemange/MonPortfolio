@@ -13,3 +13,15 @@ INSERT INTO employees (first_name, last_name, mail, password) VALUES
 ('Sophie', 'FONCEK', 'sophiefoncek@mail.com', 'sophie'),
 ('Agathe', 'FEELING', 'agathefeeling@mail.com', 'agathe'),
 ('Marc', 'PETITDEMANGE', 'marc.petitdemange57@mail.com', 'marc');
+
+DROP TABLE IF EXISTS PROJECT;
+
+CREATE TABLE PROJECT (
+                           ID INT AUTO_INCREMENT  PRIMARY KEY,
+                           TITLE VARCHAR(250) NOT NULL,
+                           DESCRIPTION TEXT NOT NULL
+);
+
+INSERT INTO PROJECT (TITLE, DESCRIPTION) VALUES
+('Test','Project cool'),
+('Projet Ionic', 'Professionnalisant');
