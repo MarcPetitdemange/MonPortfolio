@@ -28,7 +28,7 @@ public class ProjectService {
         projectRepository.deleteById(id);
     }
 
-    public Project saveEmployee(Project project) {
+    public Project saveProject(Project project) {
         Project savedProject = projectRepository.save(project);
         return savedProject;
     }
