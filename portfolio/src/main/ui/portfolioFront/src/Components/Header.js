@@ -40,6 +40,7 @@ import Contact from "./Contact";
 import {ContactMail, Description} from "@material-ui/icons";
 import About from "./About";
 import ProjectAdd from "./ProjectAdd";
+import GetAppIcon from "@material-ui/icons/GetApp";
 
 
 
@@ -100,6 +101,7 @@ export default function Header(props) {
     };
 
 
+
     return (
 
 
@@ -133,6 +135,9 @@ export default function Header(props) {
                                     </Link>
                                     <a href="https://www.linkedin.com/in/marc-petitdemange-710424146/" target="_blank">
                                         <LinkedInIcon/>
+                                    </a>
+                                    <a href="http://localhost:9000/files/CV_Marc_Petitdemange.pdf" download>
+                                        <GetAppIcon />
                                     </a>
                                 </div>
                                 <IconButton aria-controls="menu-languages" aria-haspopup="true" onClick={handleClick} >
