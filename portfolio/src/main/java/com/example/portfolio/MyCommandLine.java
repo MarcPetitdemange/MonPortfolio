@@ -3,6 +3,9 @@ package com.example.portfolio;
 import com.example.portfolio.model.Categorie;
 import com.example.portfolio.model.HelloWorld;
 import com.example.portfolio.model.Project;
+import com.example.portfolio.model.designPattern.COR.ProjectCOR.HasDescription;
+import com.example.portfolio.model.designPattern.COR.ProjectCOR.HasTitle;
+import com.example.portfolio.model.designPattern.COR.ProjectCOR.ProjectChain;
 import com.example.portfolio.service.BusinessService;
 import com.example.portfolio.service.CategorieService;
 import com.example.portfolio.service.ProjectService;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.function.Supplier;
 
 @Component
 public class MyCommandLine implements CommandLineRunner {
@@ -40,7 +44,11 @@ public class MyCommandLine implements CommandLineRunner {
         project.setCategories(arrayList);
         projectService.saveProject(project);
 
-
+        //Test COR
+        ProjectChain projectChain = new HasTitle();
+        ProjectChain projectChain1 = new HasDescription();
+        projectChain.setNextChain(projectChain1);
+        projectChain.inspect(project);
 
     }
 }
