@@ -35,20 +35,20 @@ public class MyCommandLine implements CommandLineRunner {
         HelloWorld hw = businessService.getHelloWorld();
         System.out.println(hw);
 
-        projectService.getProjects();
-        Project project = new Project();
-        project.setTitle("Projet Ballade à Metz");
-        project.setDescription("Super projet de ballade à Metz réalisé pour la fac");
-        ArrayList<Categorie> arrayList = new ArrayList<>();
-        arrayList.add(categorieService.getCategorie(1).get());
-        project.setCategories(arrayList);
-        projectService.saveProject(project);
-
-        //Test COR
-        ProjectChain projectChain = new HasTitle();
-        ProjectChain projectChain1 = new HasDescription();
-        projectChain.setNextChain(projectChain1);
-        projectChain.inspect(project);
+//        projectService.getProjects();
+//        Project project = new Project();
+//        project.setTitle("Projet Ballade à Metz");
+//        project.setDescription("Super projet de ballade à Metz réalisé pour la fac");
+//        ArrayList<Categorie> arrayList = new ArrayList<>();
+//        arrayList.add(categorieService.getCategorie(1).get());
+//        project.setCategories(arrayList);
+//        projectService.saveProject(project);
+//
+//        //Test COR
+//        ProjectChain projectChain = new HasTitle();
+//        ProjectChain projectChain1 = new HasDescription();
+//        projectChain.setNextChain(projectChain1);
+//        projectChain.inspect(project);
 
     }
 }

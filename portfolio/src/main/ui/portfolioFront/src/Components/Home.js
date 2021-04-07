@@ -5,6 +5,9 @@ import {useTranslation} from "react-i18next";
 import i18next from "i18next";
 
 import photoCV from "../resources/images/photoCV.jpg";
+import {SpeechBubble} from "react-kawaii";
+import {Button, Icon} from "@material-ui/core";
+import HelpIcon from '@material-ui/icons/Help';
 
 i18next.on('languageChanged', function(lng) {
     // E.g. set the moment locale with the current language
@@ -19,15 +22,20 @@ function Home(props) {
 
     return (
         <div style={{textAlign: "center"}}>
+
+            <img src={photoCV} style={{width: '35%', height: '35%', borderRadius:'100%'}}/>
             <TypeWriterEffect id="typeWriter"
-                textStyle={{ fontFamily: 'Red Hat Display', textAlign: 'center' }}
-                startDelay={100}
-                cursorColor="black"
-                text={i18n.t("hi")}
-                typeSpeed={100}
+                              textStyle={{ fontFamily: 'Red Hat Display', textAlign: 'center' }}
+                              startDelay={100}
+                              cursorColor="black"
+                              text={i18n.t("hi")}
+                              typeSpeed={100}
 
             />
-            <img src={photoCV} style={{width: '35%', height: '35%', borderRadius:'100%'}}/>
+            <Button color="primary" size={"large"} variant="contained" startIcon={<HelpIcon/>} style={{margin:"1em"}}>
+                En savoir plus
+            </Button>
+
             <ParticlesBg color="#ff0000" type="cobweb" bg={true} />
         </div>
     );

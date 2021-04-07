@@ -70,7 +70,7 @@ const ProjectAdd = () => {
                         <TextField style={{position : 'left'}}className={classes.TextFiled} id="title" name="title" label="Titre" variant="outlined" />
                 </Grid>
                 <Grid item xs={12}>
-                        <TextField className={classes.TextFiled} id="desc" name="desc" label="Description" variant="outlined" multiline fullWidth />
+                        <TextField className={classes.TextFiled} id="desc" name="desc" label="Description" variant="outlined" multiline fullWidth rows={6}/>
                 </Grid>
                 <Grid item xs={12}>
                         <TextField

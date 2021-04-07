@@ -1,4 +1,5 @@
-FROM openjdk:8-jdk-alpine
-ARG JAR_FILE=target/*.jar
+FROM openjdk:11
+EXPOSE 9000
+ARG JAR_FILE=target/portfolio-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]

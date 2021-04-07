@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,14 +8,24 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
 import {Translation} from "react-i18next";
-import {Button, IconButton, Menu, MenuItem, Typography} from "@material-ui/core";
+import {
+    Button,
+    Divider,
+    IconButton,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Menu,
+    MenuItem,
+    Typography
+} from "@material-ui/core";
 import TranslateIcon from '@material-ui/icons/Translate';
 import i18n from "i18next";
 import GitHubIcon from '@material-ui/icons/GitHub';
-import HomeIcon from '@material-ui/icons/Home';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import MailIcon from '@material-ui/icons/Mail';
+import InboxIcon from '@material-ui/icons/Inbox';
 import './Header.css';
 
 import {
@@ -37,10 +47,11 @@ import Home from "./Home";
 import CodeSandBox from "./CodeSandBox";
 import Cv from "./CV";
 import Contact from "./Contact";
-import {ContactMail, Description} from "@material-ui/icons";
 import About from "./About";
 import ProjectAdd from "./ProjectAdd";
 import GetAppIcon from "@material-ui/icons/GetApp";
+import SnackbarCustom from "./Snackbars/SnackbarCustom";
+import clsx from "clsx";
 
 
 
@@ -81,13 +92,25 @@ const useStyles = makeStyles((theme) => ({
     },
     Link:{
         margin: 1,
-    }
+    },
+    list: {
+        width: 250,
+    },
+    fullList: {
+        width: 'auto',
+    },
 }));
 
 
 export default function Header(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickDownload = () => {
+        setOpen(true);
+    };
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -99,6 +122,51 @@ export default function Header(props) {
             i18n.changeLanguage(chaine);
         setAnchorEl(null);
     };
+
+    const [state, setState] = React.useState({
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+    });
+
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+
+        setState({ ...state, [anchor]: open });
+    };
+
+
+    const list = (anchor) => (
+        <div
+            className={clsx(classes.list, {
+                [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+            })}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+        >
+            <List>
+                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
+        </div>
+    );
 
 
 
@@ -123,6 +191,7 @@ export default function Header(props) {
                                     <MenuItem onClick={() => handleClose('de')}><IconFlagDE/><span>&nbsp;<Translation>{t => t('German')}</Translation></span></MenuItem>
                                     <MenuItem onClick={() => handleClose('en')}><IconFlagUS/><span>&nbsp;<Translation>{t => t('English')}</Translation></span></MenuItem>
                                 </Menu>
+                                <Button onClick={toggleDrawer('left', true)}>Left</Button>
                                 <div style={{textAlign:'left', flexGrow:1}} >
                                     <Link to="/home"><Translation>{t => t('Home')}</Translation></Link>
                                     <Link to="/about"><Translation>{t => t('A propos')}</Translation></Link>
@@ -136,7 +205,7 @@ export default function Header(props) {
                                     <a href="https://www.linkedin.com/in/marc-petitdemange-710424146/" target="_blank">
                                         <LinkedInIcon/>
                                     </a>
-                                    <a href="http://localhost:9000/files/CV_Marc_Petitdemange.pdf" download>
+                                    <a href="http://localhost:9000/files/CV_Marc_Petitdemange.pdf" download onClick={handleClickDownload} >
                                         <GetAppIcon />
                                     </a>
                                 </div>
@@ -178,6 +247,7 @@ export default function Header(props) {
                         </Box>
                     </Container>
                 </Router>
+                <SnackbarCustom open={open}/>
             </React.Fragment>
         </div>
 

@@ -22,6 +22,7 @@
     "react-scripts": "4.0.3",
     "react-scroll-parallax": "^2.3.5",
     "react-typewriter-effect": "^1.0.2",
+    "recharts": "^2.0.9",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
