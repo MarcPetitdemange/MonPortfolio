@@ -10,7 +10,7 @@ import Slide from '@material-ui/core/Slide';
 import {Translation} from "react-i18next";
 import {
     Button,
-    Divider,
+    Divider, Drawer,
     IconButton,
     List,
     ListItem,
@@ -26,6 +26,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import MailIcon from '@material-ui/icons/Mail';
 import InboxIcon from '@material-ui/icons/Inbox';
+import MenuIcon from '@material-ui/icons/Menu';
 import './Header.css';
 
 import {
@@ -91,7 +92,8 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left',
     },
     Link:{
-        margin: 1,
+        margin: '0.3em',
+        padding: '0.2em',
     },
     list: {
         width: 250,
@@ -178,7 +180,7 @@ export default function Header(props) {
                 <Router>
                     <CssBaseline />
                     <HideOnScroll {...props}>
-                        <AppBar id="header" style={{backgroundColor: "rgba(255, 255, 128, .0)", textAlign: "left"}}>
+                        <AppBar id="header" style={{backgroundColor: "rgb(255, 255, 255)", textAlign: "left"}}>
                             <Toolbar>
                                 <Menu
                                     id="menu-languages"
@@ -191,15 +193,20 @@ export default function Header(props) {
                                     <MenuItem onClick={() => handleClose('de')}><IconFlagDE/><span>&nbsp;<Translation>{t => t('German')}</Translation></span></MenuItem>
                                     <MenuItem onClick={() => handleClose('en')}><IconFlagUS/><span>&nbsp;<Translation>{t => t('English')}</Translation></span></MenuItem>
                                 </Menu>
-                                <Button onClick={toggleDrawer('left', true)}>Left</Button>
+                                <IconButton onClick={toggleDrawer('left', true)}>
+                                    <MenuIcon />
+                                </IconButton>
+                                <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
+                                    {list('left')}
+                                </Drawer>
                                 <div style={{textAlign:'left', flexGrow:1}} >
-                                    <Link to="/home"><Translation>{t => t('Home')}</Translation></Link>
-                                    <Link to="/about"><Translation>{t => t('A propos')}</Translation></Link>
-                                    <Link to="/education"><Translation>{t => t('Education')}</Translation></Link>
-                                    <Link to="/experience"><Translation>{t => t('Experience')}</Translation></Link>
-                                    <Link to="/cv"><Translation>{t => t('myCv')}</Translation></Link>
-                                    <Link to="/contact"><Translation>{t => t('Contact')}</Translation></Link>
-                                    <Link to="/github">
+                                    <Link className={classes.Link} to="/home"><Translation>{t => t('Home')}</Translation></Link>
+                                    <Link className={classes.Link} to="/about"><Translation>{t => t('A propos')}</Translation></Link>
+                                    <Link className={classes.Link} to="/education"><Translation>{t => t('Education')}</Translation></Link>
+                                    <Link className={classes.Link} to="/experience"><Translation>{t => t('Experience')}</Translation></Link>
+                                    <Link className={classes.Link} to="/cv"><Translation>{t => t('myCv')}</Translation></Link>
+                                    <Link className={classes.Link} to="/contact"><Translation>{t => t('Contact')}</Translation></Link>
+                                    <Link className={classes.Link} to="/github">
                                         <GitHubIcon/>
                                     </Link>
                                     <a href="https://www.linkedin.com/in/marc-petitdemange-710424146/" target="_blank">

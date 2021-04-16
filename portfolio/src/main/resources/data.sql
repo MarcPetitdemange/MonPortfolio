@@ -1,7 +1,7 @@
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS EMPLOYEES;
 
-CREATE TABLE employees (
+CREATE TABLE EMPLOYEES (
                            id INT AUTO_INCREMENT  PRIMARY KEY,
                            first_name VARCHAR(250) NOT NULL,
                            last_name VARCHAR(250) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE employees (
                            password VARCHAR(250) NOT NULL
 );
 
-INSERT INTO employees (first_name, last_name, mail, password) VALUES
+INSERT INTO EMPLOYEES (first_name, last_name, mail, password) VALUES
 ('Laurent', 'GINA', 'laurentgina@mail.com', 'laurent'),
 ('Sophie', 'FONCEK', 'sophiefoncek@mail.com', 'sophie'),
 ('Agathe', 'FEELING', 'agathefeeling@mail.com', 'agathe'),
@@ -18,11 +18,11 @@ INSERT INTO employees (first_name, last_name, mail, password) VALUES
 DROP TABLE IF EXISTS CATEGORIES CASCADE ;
 
 CREATE TABLE CATEGORIES (
-                         ID INT AUTO_INCREMENT  PRIMARY KEY,
-                         TITLE VARCHAR(250) NOT NULL
+                            ID INT AUTO_INCREMENT  PRIMARY KEY,
+                            title VARCHAR(250) NOT NULL
 );
 
-INSERT INTO CATEGORIES (TITLE) VALUES
+INSERT INTO CATEGORIES (title) VALUES
 ('Angular'),
 ('React'),
 ('Android'),
@@ -36,26 +36,29 @@ INSERT INTO CATEGORIES (TITLE) VALUES
 ('Ionic'),
 ('Nativescript'),
 ('Javascript'),
+('Symphony'),
+('Docker'),
+('Kubernetes'),
 ('HTML / CSS');
 
 DROP TABLE IF EXISTS CATEGORIES_AFFECTATION;
 
 CREATE TABLE CATEGORIES_AFFECTATION (
-                            CATEGORIE_ID INT,
-                            PROJECT_ID INT,
-                            PRIMARY KEY (CATEGORIE_ID, PROJECT_ID)
+                                        CATEGORIE_ID INT,
+                                        PROJECT_ID INT,
+                                        PRIMARY KEY (CATEGORIE_ID, PROJECT_ID)
 );
 
 
 DROP TABLE IF EXISTS PROJECTS;
 
 CREATE TABLE PROJECTS (
-                           ID INT AUTO_INCREMENT  PRIMARY KEY,
-                           TITLE VARCHAR(250) NOT NULL,
-                           DESCRIPTION TEXT NOT NULL
+                          ID INT AUTO_INCREMENT  PRIMARY KEY,
+                          title VARCHAR(250) NOT NULL,
+                          description TEXT NOT NULL
 );
 
-INSERT INTO PROJECTS (TITLE, DESCRIPTION) VALUES
+INSERT INTO PROJECTS (title, description) VALUES
 ('Test','Project cool'),
 ('Projet Ionic', 'Professionnalisant');
 

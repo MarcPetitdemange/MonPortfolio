@@ -2,6 +2,8 @@ package com.example.portfolio.model;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -14,7 +16,8 @@ import java.util.Set;
  * Projects with
  * @author MarcP
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="PROJECTS")
 public class Project {
@@ -23,10 +26,10 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "TITLE")
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "description")
     private String description;
 
     @ManyToMany

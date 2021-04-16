@@ -47,10 +47,19 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
-<!--		<dependency>-->
+		<dependency>
+			<artifactId>spring-boot-devtools</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+
+		<!--		<dependency>-->
 <!--			<groupId>org.springframework.session</groupId>-->
 <!--			<artifactId>spring-session-jdbc</artifactId>-->
 <!--		</dependency>-->
@@ -78,6 +87,11 @@
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-surefire-plugin</artifactId>
 			<version>3.0.0-M5</version>
+		</dependency>
+		<dependency>
+			<artifactId>junit</artifactId>
+			<groupId>junit</groupId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

@@ -2,17 +2,17 @@ version: '3.3'
 
 services:
     #service 1: definition of mysql database
-    db:
-      image: mysql:latest
-      container_name: db
-      environment:
-        - MYSQL_ALLOW_EMPTY_PASSWORD=true
-        - MYSQL_PASSWORD=root
-        - MYSQL_DATABASE=db
-      ports:
-        - "3306:3306"
-      networks:
-        - portfolio-mysql
+#    db:
+#      image: mysql:latest
+#      container_name: db
+#      environment:
+#        - MYSQL_ALLOW_EMPTY_PASSWORD=true
+#        - MYSQL_PASSWORD=root
+#        - MYSQL_DATABASE=db
+#      ports:
+#        - "3306:3306"
+#      networks:
+#        - portfolio-mysql
 #      restart: always
 
 
