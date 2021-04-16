@@ -4,11 +4,9 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -17,11 +15,13 @@ import java.io.IOException;
 public class DownloadController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value="/files/{file_name}",method = RequestMethod.GET)
-    public void getFile(@PathVariable("file_name") String fileName, HttpServletResponse response){
+    @RequestMapping(value="/files/**/{fileName}",method = RequestMethod.GET)
+    public void getFile(HttpServletRequest request,@PathVariable("fileName") String fileName, HttpServletResponse response){
         try {
+            String path = request.getRequestURI().split(request.getContextPath() + "/files/")[1];
+
             // get your file as InputStream
-            Resource resource = new ClassPathResource("pdf/" + fileName);
+            Resource resource = new ClassPathResource(path);
             response.setContentType("application/pdf");
             response.addHeader("Content-Disposition", "attachment; filename="+fileName);
             IOUtils.copy(resource.getInputStream(), response.getOutputStream());

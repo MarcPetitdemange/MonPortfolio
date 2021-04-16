@@ -212,7 +212,7 @@ export default function Header(props) {
                                     <a href="https://www.linkedin.com/in/marc-petitdemange-710424146/" target="_blank">
                                         <LinkedInIcon/>
                                     </a>
-                                    <a href="http://localhost:9000/files/CV_Marc_Petitdemange.pdf" download onClick={handleClickDownload} >
+                                    <a href="http://localhost:9000/files/pdf/CV_Marc_Petitdemange.pdf" download onClick={handleClickDownload} >
                                         <GetAppIcon />
                                     </a>
                                 </div>

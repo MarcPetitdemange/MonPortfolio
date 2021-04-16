@@ -31,8 +31,8 @@ services:
       restart: always
 
 
-      depends_on:                           #define dependencies of this app
-        - db                                #dependency name (which is defined with this name 'db' in this file earlier)
+#      depends_on:                           #define dependencies of this app
+#        - db                                #dependency name (which is defined with this name 'db' in this file earlier)
 #      environment:
 #        SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db
 #        SPRING_DATASOURCE_USERNAME: user
