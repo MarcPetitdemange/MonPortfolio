@@ -21,6 +21,10 @@ services:
     backendservice:                        #it is just a name, which will be used only in this file.
       image: portfolio               #name of the image after dockerfile executes
       container_name: portfolio-app  #name of the container created from docker image
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/db?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD:
       build:
         context: .                          #docker file path (. means root directory)
         dockerfile: Dockerfile              #docker file name

@@ -1,0 +1,25 @@
+{
+  "name": "my-portfolio",
+  "version": "1.0.0",
+  "description": "Project to present my realisations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "docker-compose up backendservice && docker-compose up frontendservice"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcPetitdemange/MonPortfolio.git"
+  },
+  "keywords": [
+    "React",
+    "Javascript",
+    "Java"
+  ],
+  "author": "Marc Petitdemange",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarcPetitdemange/MonPortfolio/issues"
+  },
+  "homepage": "https://github.com/MarcPetitdemange/MonPortfolio#readme"
+}
