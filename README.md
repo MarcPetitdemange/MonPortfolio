@@ -1,11 +1,11 @@
-#My Portfolio
+# My Portfolio
 
-##Prerequisite
+## Prerequisite
 * A MySql server running
 * Node Js and npm installed
 
-##Install
+## Install
 1. Install dependancies ```npm install```
 
-##Run 
+## Run 
 To run, execute ```npm run start```
