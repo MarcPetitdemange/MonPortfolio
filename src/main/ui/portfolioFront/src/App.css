@@ -37,4 +37,14 @@
   }
 }
 
+* {
+  font-size: 2vh;
+}
+
+@media screen and (max-width: 768px) {
+  .MuiBox-root{
+    width: 100%!important;
+  }
+
+}
 
