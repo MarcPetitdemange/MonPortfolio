@@ -4,12 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './i18n';
-import {ParallaxProvider} from "react-scroll-parallax";
 
 ReactDOM.render(
-    <ParallaxProvider>
-     <App />
-    </ParallaxProvider>,
+    <App />,
   document.getElementById('root')
 );
 

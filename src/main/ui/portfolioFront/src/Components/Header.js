@@ -1,60 +1,41 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Slide from '@material-ui/core/Slide';
 import {Translation} from "react-i18next";
 import {
-    Button,
-    Divider, Drawer,
+    AppBar,
+    CssBaseline,
+    Drawer,
     IconButton,
     List,
     ListItem,
-    ListItemIcon,
     ListItemText,
     Menu,
     MenuItem,
-    Typography
-} from "@material-ui/core";
-import TranslateIcon from '@material-ui/icons/Translate';
+    Slide,
+    Toolbar,
+    useScrollTrigger
+} from "@mui/material";
 import i18n from "i18next";
-import GitHubIcon from '@material-ui/icons/GitHub';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import MailIcon from '@material-ui/icons/Mail';
-import InboxIcon from '@material-ui/icons/Inbox';
-import MenuIcon from '@material-ui/icons/Menu';
 import './Header.css';
+import {makeStyles} from "@mui/styles";
 
+import {Link} from "react-router-dom";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
-
-
-import {
-    IconFlagFR,
-    IconFlagDE,
-    IconFlagUS
-} from 'material-ui-flags';
-import { makeStyles } from '@material-ui/core/styles';
-import Github from "./Github";
-import Home from "./Home";
-import CodeSandBox from "./CodeSandBox";
-import Cv from "./CV";
-import Contact from "./Contact";
-import About from "./About";
-import ProjectAdd from "./ProjectAdd";
-import GetAppIcon from "@material-ui/icons/GetApp";
+    GetApp,
+    GitHub,
+    Home as HomeIcon,
+    Info,
+    LinkedIn,
+    LocalCafe,
+    Menu as MenuIcon,
+    Receipt,
+    School,
+    Translate,
+    Work
+} from "@mui/icons-material";
 import SnackbarCustom from "./Snackbars/SnackbarCustom";
 import clsx from "clsx";
-
-
+import {ThemeSwitch} from "./CustomComponents/ThemeSwitch";
 
 
 function HideOnScroll(props) {
@@ -84,16 +65,13 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
     title: {
         flexGrow: 1,
         textAlign: 'left',
     },
     Link:{
-        margin: '0.3em',
-        padding: '0.2em',
+        margin: theme.spacing(2),
+        color: theme.palette.text.main
     },
     list: {
         width: 250,
@@ -107,11 +85,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickDownload = () => {
-        setOpen(true);
-    };
+    const [open, ] = React.useState(false);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -132,12 +106,12 @@ export default function Header(props) {
         right: false,
     });
 
-    const toggleDrawer = (anchor, open) => (event) => {
+    const toggleDrawer = (anchor, openIt) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
 
-        setState({ ...state, [anchor]: open });
+        setState({ ...state, [anchor]: openIt });
     };
 
 
@@ -151,36 +125,36 @@ export default function Header(props) {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+                {[<Translation icon={<HomeIcon />} to="/home">{t => t('Home')}</Translation>,
+                    <Translation icon={<Info />} to="/about">{t => t('A propos')}</Translation>,
+                    <Translation icon={<School />} to="/education">{t => t('Education')}</Translation>,
+                    <Translation icon={<Work />} to="/experience">{t => t('Experience')}</Translation>,
+                    <Translation icon={<Receipt />} to="/cv">{t => t('myCv')}</Translation>,
+                    <Translation icon={<LocalCafe />} to="/contact">{t => t('Contact')}</Translation>,
+                    ].map((text, index) => {
+                    debugger;
+                        return (
+
+                                <ListItem className={classes.Link} button key={text} component={Link} to={text.props.to}>
+                                        {text.props.icon}
+                                        <ListItemText primary={text} />
+                                </ListItem>
+                        )
+                    })}
             </List>
         </div>
     );
 
 
 
+
+
     return (
-
-
         <div className={classes.root}>
             <React.Fragment>
-                <Router>
                     <CssBaseline />
                     <HideOnScroll {...props}>
-                        <AppBar id="header" style={{backgroundColor: "rgb(255, 255, 255)", textAlign: "left"}}>
+                        <AppBar color="primary">
                             <Toolbar>
                                 <Menu
                                     id="menu-languages"
@@ -189,9 +163,9 @@ export default function Header(props) {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
-                                    <MenuItem onClick={() => handleClose('fr')}><IconFlagFR/><span>&nbsp;<Translation>{t => t('French')}</Translation></span></MenuItem>
-                                    <MenuItem onClick={() => handleClose('de')}><IconFlagDE/><span>&nbsp;<Translation>{t => t('German')}</Translation></span></MenuItem>
-                                    <MenuItem onClick={() => handleClose('en')}><IconFlagUS/><span>&nbsp;<Translation>{t => t('English')}</Translation></span></MenuItem>
+                                    <MenuItem onClick={() => handleClose('fr')}><span>&nbsp;<Translation>{t => t('French')}</Translation></span></MenuItem>
+                                    <MenuItem onClick={() => handleClose('de')}><span>&nbsp;<Translation>{t => t('German')}</Translation></span></MenuItem>
+                                    <MenuItem onClick={() => handleClose('en')}><span>&nbsp;<Translation>{t => t('English')}</Translation></span></MenuItem>
                                 </Menu>
                                 <IconButton onClick={toggleDrawer('left', true)}>
                                     <MenuIcon />
@@ -200,60 +174,24 @@ export default function Header(props) {
                                     {list('left')}
                                 </Drawer>
                                 <div style={{textAlign:'left', flexGrow:1}} >
-                                    <Link className={classes.Link} to="/home"><Translation>{t => t('Home')}</Translation></Link>
-                                    <Link className={classes.Link} to="/about"><Translation>{t => t('A propos')}</Translation></Link>
-                                    <Link className={classes.Link} to="/education"><Translation>{t => t('Education')}</Translation></Link>
-                                    <Link className={classes.Link} to="/experience"><Translation>{t => t('Experience')}</Translation></Link>
-                                    <Link className={classes.Link} to="/cv"><Translation>{t => t('myCv')}</Translation></Link>
-                                    <Link className={classes.Link} to="/contact"><Translation>{t => t('Contact')}</Translation></Link>
                                     <Link className={classes.Link} to="/github">
-                                        <GitHubIcon/>
+                                        <GitHub/>
                                     </Link>
-                                    <a href="https://www.linkedin.com/in/marc-petitdemange-710424146/" target="_blank">
-                                        <LinkedInIcon/>
-                                    </a>
-                                    <a href="http://localhost:9000/files/pdf/CV_Marc_Petitdemange.pdf" download onClick={handleClickDownload} >
-                                        <GetAppIcon />
-                                    </a>
+                                    <Link className={classes.Link} to={{ pathname: "https://www.linkedin.com/in/marc-petitdemange-710424146/" }} target="_blank" >
+                                        <LinkedIn/>
+                                    </Link>
+                                    <Link className={classes.Link} to={{ pathname: "http://localhost:9000/files/pdf/CV_Marc_Petitdemange.pdf" }} target="_blank" download >
+                                        <GetApp />
+                                    </Link>
                                 </div>
                                 <IconButton aria-controls="menu-languages" aria-haspopup="true" onClick={handleClick} >
-                                    <TranslateIcon />
+                                    <Translate />
                                 </IconButton>
+                                <ThemeSwitch sx={{ m: 1 }} defaultChecked  onClick={props.colorMode.toggleColorMode} />
                             </Toolbar>
                         </AppBar>
                     </HideOnScroll>
                     <Toolbar />
-                    <Container style={{width:"100%", maxWidth:"none", padding:0}}>
-                        <Box my={2} >
-                            <Switch>
-                                <Route path="/home">
-                                    <Home />
-                                </Route>
-                                <Route path="/github">
-                                    <Github />
-                                </Route>
-                                <Route path="/lena">
-                                    <CodeSandBox />
-                                </Route>
-                                <Route path="/cv">
-                                    <Cv />
-                                </Route>
-                                <Route path="/contact">
-                                    <Contact />
-                                </Route>
-                                <Route path="/about">
-                                    <About />
-                                </Route>
-                                <Route path="/projectAdd">
-                                    <ProjectAdd />
-                                </Route>
-                                <Route path="/">
-                                    <Home />
-                                </Route>
-                            </Switch>
-                        </Box>
-                    </Container>
-                </Router>
                 <SnackbarCustom open={open}/>
             </React.Fragment>
         </div>

@@ -1,15 +1,17 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import {CardActionArea, CardMedia, IconButton} from "@material-ui/core";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import GetAppIcon from '@material-ui/icons/GetApp';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import {
+    Button ,
+    Card,
+    CardActionArea,
+    CardActions,
+    CardContent,
+    Typography,
+    IconButton
+} from '@mui/material';
 import {CopyToClipboard} from "react-copy-to-clipboard/lib/Component";
+import {Assignment, GetApp, GitHub} from "@mui/icons-material";
+import {makeStyles} from "@mui/styles";
+
 
 
 const useStyles = makeStyles({
@@ -44,15 +46,15 @@ const MyCard = (props) => {
                 </Button>
 
                 <CopyToClipboard text={props.commonProps.clone_url}>
-                    <IconButton>
-                        <AssignmentIcon/>
-                    </IconButton>
+                    <Button>
+                        <Assignment/>
+                    </Button>
                 </CopyToClipboard>
-                <IconButton download={props.commonProps.download_url}>
-                    <GetAppIcon/>
-                </IconButton>
+                <Button download={props.commonProps.download_url}>
+                    <GetApp/>
+                </Button>
                     <IconButton href={props.commonProps.html_url} target="_blank">
-                        <GitHubIcon />
+                        <GitHub />
                     </IconButton>
             </CardActions>
         </Card>

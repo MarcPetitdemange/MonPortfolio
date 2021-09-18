@@ -1,28 +1,17 @@
 import React from 'react';
-import {Parallax, ParallaxBanner, ParallaxProvider} from 'react-scroll-parallax';
-import {Image} from "@material-ui/icons"
-import CVsvg from "../resources/images/CV.svg";
-import {Chip, FormControl, Grid, Input, InputLabel, MenuItem, Select, TextField, useTheme} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import {makeStyles} from "@material-ui/core/styles";
+import {Autocomplete, Button, Chip, Grid, TextField} from "@mui/material";
 import {Mug} from "react-kawaii";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faPhone, faSms} from "@fortawesome/free-solid-svg-icons";
-import {
-    fab,
-    faTwitterSquare,
-    faFacebook,
-    faLinkedin,
-    faGithub,
-    faInstagram,
-    faSnapchat
-} from "@fortawesome/free-brands-svg-icons";
-import DoneIcon from '@material-ui/icons/Done';
-
+import {faFacebook, faInstagram, faLinkedin, faSnapchat} from "@fortawesome/free-brands-svg-icons";
+import {makeStyles} from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
     form: {
-        padding: '1em'
+        padding: '1em',
+        '& > * + *': {
+            marginTop: theme.spacing(3),
+        },
     },
     TextFiled: {
         marginTop : '1em',
@@ -30,18 +19,17 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         margin: theme.spacing(1),
+        minWidth: 120,
     },
-    chips: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    chip: {
-        margin: 2,
-        padding: '0.8vw',
-        borderRadius: '32px'
+    chip :{
+      padding: '0.5em',
+        fontSize: "initial"
     },
     noLabel: {
         marginTop: theme.spacing(3),
+    },
+    root: {
+
     },
 }));
 
@@ -69,21 +57,6 @@ const contact = [
 
 const Contact = () => {
     const classes = useStyles();
-    const theme = useTheme();
-    const [listContactType, setListContactType] = React.useState([]);
-
-    const handleChange = (event) => {
-        setListContactType(event.target.value);
-        debugger;
-    };
-
-    function deleteItemOfListContactType(selectList, valueToDelete) {
-        debugger;
-        let newList = selectList.filter((item) => item.value != valueToDelete.value);
-        setListContactType(newList);
-    }
-
-
 
     return (
         <form className={classes.form} style={{width: '70%', marginLeft:"auto", marginRight:"auto"}} noValidate autoComplete="off">
@@ -102,34 +75,27 @@ const Contact = () => {
                     <TextField className={classes.TextFiled} id="email" name="email" label="Votre adresse e-mail" variant="filled" fullWidth />
                 </Grid>
                 <Grid item xs={12}>
-                    <FormControl className={classes.TextFiled} fullWidth variant="filled">
-                        <InputLabel id="demo-mutiple-chip-label">Comment souhaitez vous être contacté ?</InputLabel>
-                        <Select
-                            variant="filled"
-                            labelId="demo-mutiple-chip-label"
-                            id="demo-mutiple-chip"
-                            multiple
-                            value={listContactType}
-                            onChange={handleChange}
-                            input={<Input id="select-multiple-chip" />}
-                            renderValue={(selected) => {
-                                return <div className={classes.chips}>
-                                    {selected.map((contactType => {
-                                        return (<Chip icon={<FontAwesomeIcon size="lg" icon={contactType.icon}/>} key={contactType.value} label={contactType.value} className={classes.chip} clickable onMouseDown={(event) => {
-                                            event.stopPropagation();
-                                        }} onDelete={(e) => {deleteItemOfListContactType(selected,contactType)}}/>);
-                                    }))}
-                                </div>
-                            }}
-                            MenuProps={MenuProps}
-                        >
-                            {contact.map((contactType) => (
-                                <MenuItem key={contactType.value} value={contactType} >
-                                    <FontAwesomeIcon icon={contactType.icon}/> &nbsp;{contactType.value}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                    <Autocomplete
+                        fullWidth
+                        multiple
+                        id="checkboxes-tags-demo"
+                        options={contact}
+                        disableCloseOnSelect
+                        getOptionLabel={(option) => option.value}
+                        renderOption={(option, { selected }) => (
+                            <React.Fragment>
+                                <FontAwesomeIcon icon={option.icon}/> &nbsp; {option.value}
+                            </React.Fragment>
+                        )}
+                        renderTags={(tagValue, getTagProps) =>
+                            tagValue.map((option, index) => (
+                                <Chip variant="outlined"  icon={<FontAwesomeIcon size="sm" icon={option.icon}/>} key={option.value} label={option.value}  className={classes.chip} clickable  {...getTagProps({ index })} />
+                            ))
+                        }
+                        renderInput={(params) => (
+                            <TextField {...params} variant="filled" label="Préférez vous être contacté par :"  />
+                        )}
+                    />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField className={classes.TextFiled}  id="message" name="message" label="Votre message" variant="filled" multiline fullWidth rows={6}/>

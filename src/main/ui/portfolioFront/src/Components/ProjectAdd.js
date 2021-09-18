@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
-import {Grid, MenuItem, TextareaAutosize, TextField} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import {Label} from "@material-ui/icons";
+import React from 'react';
+import {Grid, MenuItem, TextField, Button} from "@mui/material";
+import {makeStyles} from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -30,8 +28,8 @@ const ProjectAdd = () => {
     const handleFieldChange = event => {
         console.log(event);
         event.persist();
-        setFormState(formState => ({
-            ...formState,
+        setFormState(formStateValue => ({
+            ...formStateValue,
             [event.target.name]:
                 event.target.type === "checkbox"
                     ? event.target.checked
@@ -40,23 +38,15 @@ const ProjectAdd = () => {
     };
 
     const changeEvent = (e) => {
-        /*let val = e.currentTarget.files[0];
-        let formData = new FormData();
-        formData.append("photo", val);*/
         let state = [];
         Array.from(e.currentTarget.files).forEach(file => {
             state.push(URL.createObjectURL(file));
         });
         if (e.currentTarget.files && e.currentTarget.files[0]) {
-            setImageState(imageState => ({
+            setImageState(imageStateValue => ({
                 images: state
             }))
         }
-
-
-        /*fetch('/upload/image', {method: "POST", body: formData}).then(r => {
-            debugger;
-        });*/
     }
 
 

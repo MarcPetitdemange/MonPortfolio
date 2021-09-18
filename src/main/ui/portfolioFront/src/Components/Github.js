@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {properties} from "../properties/properties";
 import MyCard from "./MyCard";
-import {Card, Container} from "@material-ui/core";
+import {Grid} from "@mui/material";
 
 function Github(props) {
-    const [error, setError] = useState(null);
+    const [, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
 
@@ -32,12 +32,12 @@ function Github(props) {
 
     if(isLoaded) {
         return (
-            <div style={{display: "inline-flex"}}>
-                {items.map(item => (
-                    <MyCard key={item.name} commonProps={item}>
-                    </MyCard>
-                ))}
-            </div>
+            <Grid container spacing={12}  direction="row" style={{justifyContent:"center", alignItems:"center"}}>
+                    {items.map(item => (
+                        <MyCard key={item.name} commonProps={item}>
+                        </MyCard>
+                    ))}
+            </Grid>
         );
     }else{
         return <div></div>

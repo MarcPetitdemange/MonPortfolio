@@ -1,18 +1,18 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBeer, faBook, faCode, faCoffee, faSchool, faTerminal, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import {Box, Grid, Paper, useMediaQuery} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import { styled } from '@material-ui/core/styles';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faBook, faCoffee, faSchool, faTerminal} from "@fortawesome/free-solid-svg-icons";
+import {Box, Grid, Paper, styled} from "@mui/material";
+import {makeStyles} from "@mui/styles";
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(2),
         textAlign: 'center',
-        color: theme.palette.text.secondary,
+        color: theme.palette.secondary,
     },
 }));
 
