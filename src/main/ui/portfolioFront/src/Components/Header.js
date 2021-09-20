@@ -93,7 +93,6 @@ export default function Header(props) {
 
     const handleClose = (chaine) => {
         console.log(chaine);
-        debugger;
         if(chaine != null && typeof chaine === "string")
             i18n.changeLanguage(chaine);
         setAnchorEl(null);
@@ -127,12 +126,11 @@ export default function Header(props) {
             <List>
                 {[<Translation icon={<HomeIcon />} to="/home">{t => t('Home')}</Translation>,
                     <Translation icon={<Info />} to="/about">{t => t('A propos')}</Translation>,
-                    <Translation icon={<School />} to="/education">{t => t('Education')}</Translation>,
-                    <Translation icon={<Work />} to="/experience">{t => t('Experience')}</Translation>,
+                    <Translation icon={<School />} to="/studies">{t => t('Education')}</Translation>,
+                    <Translation icon={<Work />} to="/experiencePro">{t => t('Experience')}</Translation>,
                     <Translation icon={<Receipt />} to="/cv">{t => t('myCv')}</Translation>,
                     <Translation icon={<LocalCafe />} to="/contact">{t => t('Contact')}</Translation>,
                     ].map((text, index) => {
-                    debugger;
                         return (
 
                                 <ListItem className={classes.Link} button key={text} component={Link} to={text.props.to}>

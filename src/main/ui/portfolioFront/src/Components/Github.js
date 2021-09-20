@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {properties} from "../properties/properties";
 import MyCard from "./MyCard";
-import {Grid} from "@mui/material";
+import {Stack} from "@mui/material";
 
 function Github(props) {
     const [, setError] = useState(null);
@@ -16,7 +16,6 @@ function Github(props) {
             .then(res => res.json())
             .then(
                 (result) => {
-                    debugger;
                     setIsLoaded(true);
                     setItems(result);
                 },
@@ -32,12 +31,15 @@ function Github(props) {
 
     if(isLoaded) {
         return (
-            <Grid container spacing={12}  direction="row" style={{justifyContent:"center", alignItems:"center"}}>
-                    {items.map(item => (
-                        <MyCard key={item.name} commonProps={item}>
-                        </MyCard>
-                    ))}
-            </Grid>
+            <div>
+                <Stack direction={{ xs: 'column', sm: 'column', md: 'column', lg: 'row' }}
+                       spacing={4} >
+                        {items.map(item => (
+                            <MyCard item xs={4} key={item.name} commonProps={item}>
+                            </MyCard>
+                        ))}
+                </Stack>
+            </div>
         );
     }else{
         return <div></div>

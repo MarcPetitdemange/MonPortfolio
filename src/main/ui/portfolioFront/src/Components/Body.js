@@ -9,10 +9,13 @@ import Contact from "./Contact";
 import About from "./About";
 import ProjectAdd from "./ProjectAdd";
 import {withStyles} from "@mui/styles";
+import Studies from "./Studies";
+import ExperiencePro from "./ExperiencePro";
 
 const styles = theme => ({
     root: {
-        textAlign: "center"
+        textAlign: "center",
+        height: "100%"
     }
 });
 
@@ -43,6 +46,12 @@ export class Body extends Component {
                         </Route>
                         <Route path="/projectAdd">
                             <ProjectAdd />
+                        </Route>
+                        <Route path="/studies">
+                            <Studies />
+                        </Route>
+                        <Route path="/experiencePro">
+                            <ExperiencePro />
                         </Route>
                         <Route path="/">
                             <Home />

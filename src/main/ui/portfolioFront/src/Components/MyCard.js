@@ -16,46 +16,55 @@ import {makeStyles} from "@mui/styles";
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
-        margin: 6
+        maxWidth: 300,
+        minWidth: 300,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        maxHeight: 200,
+        minHeight: 200
     },
-    media: {
-        height: 140,
+    button: {
+        height: "100%",
     },
+    text: {
+        textOverflow:'ellipsis',
+        width:'auto',
+        overflow:'hidden',
+    },
+
 });
 
 const MyCard = (props) => {
     const classes = useStyles();
-    debugger;
 
     return (
         <Card className={classes.root}>
-            <CardActionArea>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+            <CardActionArea className={classes.button}>
+                <CardContent className={classes.button}>
+                    <Typography className={classes.text} gutterBottom variant="h5" component="h2">
                         {props.commonProps.name}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography className={classes.text} variant="body2" color="textSecondary" component="p" style={{height:80}}>
                         {props.commonProps.description}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
+                <Button color="info" size="small" >
                     Learn More
                 </Button>
-
-                <CopyToClipboard text={props.commonProps.clone_url}>
-                    <Button>
+                <CopyToClipboard color='secondary' text={props.commonProps.clone_url}>
+                    <IconButton>
                         <Assignment/>
-                    </Button>
-                </CopyToClipboard>
-                <Button download={props.commonProps.download_url}>
-                    <GetApp/>
-                </Button>
-                    <IconButton href={props.commonProps.html_url} target="_blank">
-                        <GitHub />
                     </IconButton>
+                </CopyToClipboard>
+                <IconButton color='info' download={props.commonProps.download_url}>
+                    <GetApp/>
+                </IconButton>
+                <IconButton href={props.commonProps.html_url} target="_blank">
+                    <GitHub />
+                </IconButton>
             </CardActions>
         </Card>
     );

@@ -95,7 +95,6 @@ const ProjectAdd = () => {
                 <Grid item xs={12} style={{padding: '1em', background: 'linear-gradient(to bottom, #ffffff, #4286f4)', borderRadius: '1em'}}>
                   {
                       imageState.images.map((value,index) =>{
-                          debugger;
                           return <img  style={{borderRadius:'100%',margin : '1em', width: '20em', height:'20em'}} src={imageState.images[index]}></img>
                       })
                   }
