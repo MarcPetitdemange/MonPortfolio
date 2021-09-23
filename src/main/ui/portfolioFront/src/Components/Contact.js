@@ -1,17 +1,13 @@
 import React from 'react';
-import {Autocomplete, Button, Chip, Grid, TextField} from "@mui/material";
-import {Mug} from "react-kawaii";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faPhone, faSms} from "@fortawesome/free-solid-svg-icons";
-import {faFacebook, faInstagram, faLinkedin, faSnapchat} from "@fortawesome/free-brands-svg-icons";
 import {makeStyles} from "@mui/styles";
+import {Email, Facebook, Instagram, LinkedIn, Mail, PhoneIphone, Sms} from "@mui/icons-material";
+import {Mug} from "react-kawaii";
+import {Autocomplete, Box, Button, Chip, Divider, Grid, IconButton, TextField, Typography} from "@mui/material";
+import {FaSnapchatSquare} from "react-icons/all";
 
 const useStyles = makeStyles((theme) => ({
     form: {
         padding: '1em',
-        '& > * + *': {
-            marginTop: theme.spacing(3),
-        },
     },
     TextFiled: {
         marginTop : '1em',
@@ -45,13 +41,13 @@ const MenuProps = {
 };
 
 const contact = [
-    {value:'Email', icon: faEnvelope},
-    {value:'Téléphone', icon: faPhone},
-    {value:'Sms', icon: faSms},
-    {value:'Linkedin', icon: faLinkedin},
-    {value:'Facebook', icon: faFacebook},
-    {value:'Snapchat', icon: faSnapchat},
-    {value:'Instagram', icon: faInstagram},
+    {value:'Email', icon: <Email />},
+    {value:'Téléphone', icon: <PhoneIphone />},
+    {value:'Sms', icon: <Sms />},
+    {value:'Linkedin', icon: <LinkedIn />},
+    {value:'Facebook', icon: <Facebook />},
+    {value:'Snapchat', icon:  <FaSnapchatSquare size={22}/>},
+    {value:'Instagram', icon: <Instagram/>},
 ];
 
 
@@ -61,9 +57,38 @@ const Contact = () => {
     return (
         <form className={classes.form} style={{width: '70%', marginLeft:"auto", marginRight:"auto"}} noValidate autoComplete="off">
             <Mug size={170} mood="happy" color="#A6E191" />
+            <Typography variant={"h2"} textAlign={"left"} marginTop={7} marginBottom={3}>Mes  <span style={{color:"#dfd70f", fontWeight:"bold"}}>coordonnées</span> </Typography>
+
             <Grid
-                justify="space-between" // Add it here :)
                 container
+                rowSpacing={3}
+                width="100%"
+                justifyContent={"space-around"}
+            >
+                <Grid item>
+                    <IconButton>
+                        <Mail style={{ fontSize: 60 }} />
+                    </IconButton>
+                    <Typography>Mail : marc.petitdemange57@gmail.com</Typography>
+                </Grid>
+                <Divider orientation="vertical" flexItem>
+                    OU
+                </Divider>
+                <Grid item>
+                    <IconButton>
+                        <PhoneIphone style={{ fontSize: 60 }} />
+                    </IconButton>
+                    <Typography>Tel : +33 6 11 51 09 57</Typography>
+                </Grid>
+            </Grid>
+
+
+            <Typography variant={"h2"} textAlign={"left"} marginTop={7} marginBottom={3}>Me <span style={{color:"#d71588", fontWeight:"bold"}}> contacter </span></Typography>
+
+            <Grid
+                justify="space-between"
+                container
+                rowSpacing={3}
             >
                 <Grid item>
                     <TextField style={{position : 'left'}}className={classes.TextFiled} id="name" name="name" label="Votre nom" variant="filled" />
@@ -82,15 +107,15 @@ const Contact = () => {
                         options={contact}
                         disableCloseOnSelect
                         getOptionLabel={(option) => option.value}
-                        renderOption={(option, { selected }) => (
-                            <React.Fragment>
-                                <FontAwesomeIcon icon={option.icon}/> &nbsp; {option.value}
-                            </React.Fragment>
+                        renderOption={(props, option) => (
+                            <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                                {option.icon} {option.value}
+                            </Box>
                         )}
                         renderTags={(tagValue, getTagProps) =>
-                            tagValue.map((option, index) => (
-                                <Chip variant="outlined"  icon={<FontAwesomeIcon size="sm" icon={option.icon}/>} key={option.value} label={option.value}  className={classes.chip} clickable  {...getTagProps({ index })} />
-                            ))
+                            tagValue.map((option, index) => {debugger; return (
+                                <Chip variant="outlined"  icon={ option.icon} key={option.value} label={option.value}  className={classes.chip} clickable  {...getTagProps({ index })} />
+                            )})
                         }
                         renderInput={(params) => (
                             <TextField {...params} variant="filled" label="Préférez vous être contacté par :"  />
@@ -100,7 +125,7 @@ const Contact = () => {
                 <Grid item xs={12}>
                     <TextField className={classes.TextFiled}  id="message" name="message" label="Votre message" variant="filled" multiline fullWidth rows={6}/>
                 </Grid>
-                <Grid container justify="flex-end">
+                <Grid container justify="flex-end" marginTop={3} justifyContent={'flex-end'}>
                     <Button color="primary" variant="contained" style={{marginRight: '1em'}}>Confirm</Button>
                     <Button color="secondary" variant="outlined">Cancel</Button>
                 </Grid>

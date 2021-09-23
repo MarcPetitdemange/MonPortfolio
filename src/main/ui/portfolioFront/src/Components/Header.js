@@ -7,7 +7,7 @@ import {
     Drawer,
     IconButton,
     List,
-    ListItem,
+    ListItem, ListItemIcon,
     ListItemText,
     Menu,
     MenuItem,
@@ -134,7 +134,9 @@ export default function Header(props) {
                         return (
 
                                 <ListItem className={classes.Link} button key={text} component={Link} to={text.props.to}>
-                                        {text.props.icon}
+                                        <ListItemIcon>
+                                            {text.props.icon}
+                                        </ListItemIcon>
                                         <ListItemText primary={text} />
                                 </ListItem>
                         )

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Box, Step, StepContent, StepLabel, Stepper, styled, Typography} from "@mui/material";
-import {Check, GroupAdd, School, Settings, VideoLabel} from "@mui/icons-material";
+import {Box, Step, StepContent, StepLabel, Stepper, styled} from "@mui/material";
+import {School} from "@mui/icons-material";
 import univLogo from "../resources/images/Logo-universite-de-lorraine.png";
+import iutLogo from "../resources/images/logo_iut.png";
 
 
 const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
@@ -31,8 +32,8 @@ function ColorlibStepIcon(props) {
     const icons = {
         1: <img width="35px" src = {univLogo} />,
         2: <img width="35px" src = {univLogo} />,
-        3: <VideoLabel />,
-        4: <School />,
+        3: <img width="35px" src = {iutLogo} />,
+        4: <School fontSize="large"/>,
     };
 
     return (
@@ -79,7 +80,7 @@ class Studies extends Component {
                     </Step>
                     <Step active = {true}>
                         <StepLabel StepIconComponent={ColorlibStepIcon}>
-                            <h1>  Baccalauréat mention Très Bien obtenu au Lycée Jean-Moulin de Forbach </h1>
+                            <h1>  Baccalauréat Scientifique mention Très Bien obtenu au Lycée Jean-Moulin de Forbach </h1>
                         </StepLabel>
                         <StepContent>
                             <Box sx={{ mb: 2 }}>
